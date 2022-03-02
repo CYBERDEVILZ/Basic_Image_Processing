@@ -18,21 +18,21 @@ from sqlalchemy import true
 
 height = 750
 width = 500
-img = cv2.imread("images/image1.jpg") # using image coz my webcam sucks :(
+img = cv2.imread("images/image4.jpg") # using image coz my webcam sucks :(
 img = cv2.resize(img, (width, height))    # change (width, height) accordingly with different images
 
 # initializing warped img
 warped = np.zeros_like(img)
 
 # detecting edges
-blur = cv2.GaussianBlur(img, (5,5), 0)
+blur = cv2.GaussianBlur(img, (5,5), 2)
 canny = cv2.Canny(blur, 200, 200)
-dilate = cv2.dilate(canny, (5,5), iterations=2)
+dilate = cv2.dilate(canny, (5,5), iterations=5)
 
 # detecting shapes and isolating a rectangle
 contour, hierarchy = cv2.findContours(dilate, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 for cnt in contour:
-    if cv2.contourArea(cnt) > 500:
+    if cv2.contourArea(cnt) > 50:
         corners = cv2.approxPolyDP(cnt, 50, True)   # corner points array shape (4,1,2)
 
         if len(corners) == 4:
