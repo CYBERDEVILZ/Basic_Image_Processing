@@ -8,8 +8,6 @@ LOGIC:
 
 """
 
-from hashlib import new
-from turtle import down
 import cv2
 import numpy as np
 
